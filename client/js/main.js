@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var elements = jStripe.elements({
+  var elements = _stripe.elements({
     fonts: [{
       cssSrc: 'https://fonts.googleapis.com/css?family=Roboto',
     }]
@@ -35,7 +35,7 @@
   /**
    * Payment Request Element
    */
-  var paymentRequest = jStripe.paymentRequest({
+  var paymentRequest = _stripe.paymentRequest({
     country: "US",
     currency: "usd",
     total: {

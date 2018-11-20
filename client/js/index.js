@@ -1,7 +1,7 @@
 'use strict';
 
-const jStripe = Stripe('pk_test_ZbLym6LFKkbNowX0vXSq5NKH');
-const jAxios = axios.create({
+const _stripe = Stripe('pk_test_ZbLym6LFKkbNowX0vXSq5NKH');
+const _axios = axios.create({
   baseURL: 'http://46.101.212.13/api/v2',
   timeout: 20000,
   headers: {'X-Custom-Header': 'foobar'}
@@ -64,9 +64,9 @@ function registerElements(elements, checkoutForm) {
     };
   }
 
-  function createCharge(token, formData) {
-    formData = getFormData();
-    jAxios.post('/charge', {
+  function createCharge(token) {
+    const formData = getFormData();
+    _axios.post('/charge', {
       amount: 2500,
       currency: "usd",
       source: token.id,
@@ -85,7 +85,6 @@ function registerElements(elements, checkoutForm) {
     })
     .then(response => {
       if (response.data.success) {
-        console.log(response.data);
         savePayment(response.data.charge);
       } else {
         checkout.querySelector('.charge-amount').innerText = "payment failed";
@@ -94,26 +93,24 @@ function registerElements(elements, checkoutForm) {
       }
     })
     .catch(error => {
-      console.log(error);
       checkout.classList.remove('submitting');
     });
   }
 
   function savePayment(data) {
-    jAxios.post('/save-payment', {
+    _axios.post('/save-payment', {
       name: data.source.name,
       email: data.receipt_email,
       amount: Math.floor(data.amount / 100),
       tokenId: data.id
     })
     .then(response => {
-      console.log(response.data);
       checkout.classList.add('submitted');
       checkout.classList.remove('submitting');
       checkout.querySelector('.charge-amount').innerText = Math.floor(data.amount / 100);
     })
     .catch(error => {
-      console.log(error);
+      console.log('error');
     })
   }
 
@@ -160,11 +157,10 @@ function registerElements(elements, checkoutForm) {
     checkout.classList.add('submitting');
     disableInputs();
 
-    var formData = getFormData();
-    jStripe.createToken(elements[0], formData)
+    const formData = getFormData();
+    _stripe.createToken(elements[0], formData)
       .then(function(result) {
         if (result.token) {
-          console.log(result.token);
           createCharge(result.token);
         } else {
           enableInputs();
