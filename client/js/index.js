@@ -2,7 +2,7 @@
 
 const jStripe = Stripe('pk_test_ZbLym6LFKkbNowX0vXSq5NKH');
 const jAxios = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://46.101.212.13/api/v2',
   timeout: 20000,
   headers: {'X-Custom-Header': 'foobar'}
 });
@@ -85,6 +85,7 @@ function registerElements(elements, checkoutForm) {
     })
     .then(response => {
       if (response.data.success) {
+        console.log(response.data);
         savePayment(response.data.charge);
       } else {
         checkout.querySelector('.charge-amount').innerText = "payment failed";
@@ -93,6 +94,7 @@ function registerElements(elements, checkoutForm) {
       }
     })
     .catch(error => {
+      console.log(error);
       checkout.classList.remove('submitting');
     });
   }
@@ -105,9 +107,13 @@ function registerElements(elements, checkoutForm) {
       tokenId: data.id
     })
     .then(response => {
+      console.log(response.data);
       checkout.classList.add('submitted');
       checkout.classList.remove('submitting');
       checkout.querySelector('.charge-amount').innerText = Math.floor(data.amount / 100);
+    })
+    .catch(error => {
+      console.log(error);
     })
   }
 
@@ -158,6 +164,7 @@ function registerElements(elements, checkoutForm) {
     jStripe.createToken(elements[0], formData)
       .then(function(result) {
         if (result.token) {
+          console.log(result.token);
           createCharge(result.token);
         } else {
           enableInputs();

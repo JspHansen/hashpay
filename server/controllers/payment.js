@@ -3,6 +3,13 @@ const stripe = require('../config/stripe');
 const config = require('../config/config');
 const Payment = require('../models/payment');
 
+exports.testPayment = (req, res) => {
+  res.json({
+    message: 'Hello Stripe checkout server!',
+    timestamp: new Date().toISOString()
+  });
+}
+
 exports.chargePayment = (req, res) => {
   stripe.charges.create(req.body, (error, charge) => {
     if (error) {
