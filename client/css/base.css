@@ -1,0 +1,288 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-size: 62.5%;
+  font-family: Roboto, Open Sans, Segoe UI, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  overflow-x: hidden;
+  background-color: #f6f9fc;
+}
+
+/** Page-specific styles */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes void-animation-out {
+  0%,
+  to {
+    opacity: 1;
+  }
+}
+
+main {
+  position: relative;
+  display: block;
+  z-index: 1;
+}
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 750px;
+  padding: 110px 20px 110px;
+  position: relative;
+}
+
+.checkout-form {
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  padding: 80px 0px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+@media (min-width: 600px) {
+  .checkout-form {
+    padding: 40px 0px;
+  }
+}
+
+.checkout-form.submitted form,
+.checkout-form.submitting form {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.checkout-form.submitted .success,
+.checkout-form.submitting .success {
+  pointer-events: all;
+}
+
+.checkout-form.submitting .success .icon {
+  opacity: 1;
+}
+
+.checkout-form.submitted .success > * {
+  opacity: 1;
+  transform: none !important;
+}
+
+.checkout-form.submitted .success > :nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.checkout-form.submitted .success > :nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.checkout-form.submitted .success > :nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.checkout-form.submitted .success .icon .border,
+.checkout-form.submitted .success .icon .checkmark {
+  opacity: 1;
+  stroke-dashoffset: 0 !important;
+}
+
+.checkout-form .caption {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  padding: 15px 10px 0;
+  color: #aab7c4;
+  font-family: Roboto, "Open Sans", "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.checkout-form .caption * {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.checkout-form .caption .no-charge {
+  color: #cfd7df;
+  margin-right: 10px;
+}
+
+.checkout-form .caption a.source {
+  text-align: right;
+  color: inherit;
+  transition: color 0.1s ease-in-out;
+  margin-left: 10px;
+}
+
+.checkout-form .caption a.source:hover {
+  color: #6772e5;
+}
+
+.checkout-form .caption a.source:active {
+  color: #43458b;
+}
+
+.checkout-form .caption a.source  svg {
+  margin-right: 10px;
+}
+
+.checkout-form .caption a.source svg path {
+  fill: currentColor;
+}
+
+.checkout-form form {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  transition-property: opacity, transform;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.checkout-form form input::-webkit-input-placeholder {
+  opacity: 1;
+}
+
+.checkout-form form input::-moz-placeholder {
+  opacity: 1;
+}
+
+.checkout-form form input:-ms-input-placeholder {
+  opacity: 1;
+}
+
+.checkout-form .error {
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 20px;
+  padding: 0 15px;
+  font-size: 13px !important;
+  opacity: 0;
+  transform: translateY(10px);
+  transition-property: opacity, transform;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.checkout-form .error.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.checkout-form .error .message {
+  font-size: inherit;
+}
+
+.checkout-form .error svg {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin-top: -1px;
+  margin-right: 10px;
+}
+
+.checkout-form .success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  text-align: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+@media (min-width: 670px) {
+  .checkout-form .success {
+    padding: 40px;
+  }
+}
+
+.checkout-form .success > * {
+  transition-property: opacity, transform;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.checkout-form .success .icon {
+  margin: 15px 0 30px;
+  transform: translateY(70px) scale(0.75);
+}
+
+.checkout-form .success .icon svg {
+  will-change: transform;
+}
+
+.checkout-form .success .icon .border {
+  stroke-dasharray: 251;
+  stroke-dashoffset: 62.75;
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+  animation: spin 1s linear infinite;
+}
+
+.checkout-form .success .icon .checkmark {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  transition: stroke-dashoffset 0.35s cubic-bezier(0.165, 0.84, 0.44, 1) 0.35s;
+}
+
+.checkout-form .success .title {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.checkout-form .success .message {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 25px;
+  line-height: 1.6em;
+}
+
+.checkout-form .success .message span {
+  font-size: inherit;
+}
+
+.checkout-form .success .reset:active {
+  transition-duration: 0.15s;
+  transition-delay: 0s;
+  opacity: 0.65;
+}
+
+.checkout-form .success .reset svg {
+  will-change: transform;
+}
