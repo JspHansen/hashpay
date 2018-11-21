@@ -2,7 +2,7 @@
 
 const _stripe = Stripe('pk_test_ZbLym6LFKkbNowX0vXSq5NKH');
 const _axios = axios.create({
-  baseURL: 'http://46.101.212.13/api/v2',
+  baseURL: 'https://pay.hash.ws/api/v2',
   timeout: 20000,
   headers: {'X-Custom-Header': 'foobar'}
 });
