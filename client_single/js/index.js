@@ -1,8 +1,8 @@
 'use strict';
 
-const _stripe = Stripe('pk_test_ZbLym6LFKkbNowX0vXSq5NKH');
+const _stripe = Stripe('pk_test_xxx');
 const _axios = axios.create({
-  baseURL: 'https://api.hashpay.me/api/v2',
+  baseURL: 'http://0.0.0.0:3000/v2',
   timeout: 20000,
   headers: {'X-Custom-Header': 'foobar'}
 });

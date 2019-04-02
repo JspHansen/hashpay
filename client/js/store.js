@@ -5,7 +5,6 @@ class Store {
     this.products = {};
     this.axios = axios.create({
       baseURL: 'http://0.0.0.0:3000/v2',
-      /* baseURL: 'https://api.hashpay.me/api/v2', */
       timeout: 20000,
       headers: {'X-Custom-Header': 'foobar'}
     });

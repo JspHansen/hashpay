@@ -2,7 +2,7 @@
 
 > A simple app to payment on stripe. Front-end:-  Vue.js site with Product, Order and Confirmation pages. Built with vue-router, axios and Stripe.js. And Back-end:- Node.js server to handle payment processing and order confirmation details.
 
-> Add your stripe public key & secret key on directory -> server/routes/payment.js & src/components/Order.vue(only update public key here.)
+> Add your stripe public key & secret key on directory -> server/config/config.js(only update public key here.)
 
 ## Build Setup
 
@@ -10,7 +10,7 @@
 # install dependencies
 npm install
 
-# serve both front-end & back-end 
+# serve both front-end & back-end
 npm start
 
 # serve with hot reload at localhost:8080
