@@ -3,9 +3,11 @@ const PaymentController = require('../controllers/payment');
 const apiRoutes = express.Router();
 
 const configureRoutes = (app) => {
-  apiRoutes.post('/charge', PaymentController.chargePayment);
+  apiRoutes.get('/test',          PaymentController.testPayment);
+  apiRoutes.get('/config',        PaymentController.readConfig);
+  apiRoutes.post('/card-payment', PaymentController.cardPayment);
   apiRoutes.post('/save-payment', PaymentController.savePayment);
-  app.use('/api', apiRoutes);
+  app.use('/v2', apiRoutes);
 };
 
 module.exports = configureRoutes;

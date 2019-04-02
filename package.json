@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --content-base --config config/webpack.conf.js",
     "start": "concurrently \"npm run dev \" \"set NODE_ENV=production && nodemon server/index.js\" ",
-    "serve": "NODE_ENV='production' npm start"
+    "serve": "set NODE_ENV=production && nodemon server/index.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
